@@ -1,0 +1,13 @@
+#!/bin/sh
+yum install -y http://rdo.fedorapeople.org/rdo-release.rpm python-netaddr python-setuptools git
+git clone git://github.com/stackforge/packstack
+cd packstack
+python setup.py install_puppet_modules
+./bin/packstack --gen-answer-file=answers
+sed -i 's/CONFIG_AMQP_SERVER=qpid/CONFIG_AMQP_SERVER=rabbitmq/' answers
+sed -i 's/CONFIG_USE_EPEL=n/CONFIG_USE_EPEL=y/' answers
+ ./bin/packstack --answer-file=answers
+packstack --allinone --amqp-server=rabbitmq --use-epel=y
+
+
+
