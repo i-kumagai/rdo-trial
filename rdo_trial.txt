@@ -8,3 +8,11 @@ python setup.py install_puppet_modules
 sed -i 's/CONFIG_AMQP_SERVER=qpid/CONFIG_AMQP_SERVER=rabbitmq/' answers
 sed -i 's/CONFIG_USE_EPEL=n/CONFIG_USE_EPEL=y/' answers
 #./bin/packstack --answer-file=answers
+
+
+
+    1  b0ip=`ifconfig bond0|grep "inet addr"|awk -F '[ :]*' '{print $4}'`
+    2  echo $b0ip
+    3  b1ip=`ifconfig bond1|grep "inet addr"|awk -F '[ :]*' '{print $4}'`
+openstack-neutron-ml2.noarch 0:2014.1.3-1.el6
+
